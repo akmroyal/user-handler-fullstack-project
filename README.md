@@ -41,7 +41,123 @@ Ensure that you have the following installed on your system:
 ### Installation Instructions
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/your-repository-name.git
-   cd your-repository-name
+   ```
+   git clone https://github.com/akmroyal/user-handler-fullstack-project.git
+   cd user-handler-fullstack-project
+
+2. **Install Dependencies for Backend**:
+Navigate to the backend directory and install the necessary dependencies:
+
+```
+cd backend
+npm install 
+```
+3. Install Dependencies for Frontend:
+Navigate to the frontend directory and install the necessary dependencies:
+
+
+```
+cd frontend
+npm install 
+```
+
+
+4. **Configure Environment Variables**:
+Create a .env file in the backend directory to store environment variables:
+
+```
+MONGO_URI=<your-mongodb-connection-string>
+PORT=8000
+```
+Ensure that MongoDB is running locally or on a cloud provider, and add your connection string to MONGO_URI.
+
+5. **Run Backend Server**:
+In the backend directory, start the server:
+
+```
+npm start
+```
+
+6. **Run Frontend**:
+Navigate to the frontend directory and start the Vite development server:
+
+```
+npm run dev
+API Endpoints
+Endpoint	Method	Description
+/api/user	GET	Fetch all users
+/api/user/:id	GET	Fetch user by ID
+/api/user	POST	Create a new user
+/api/user/:id	PUT	Update user by ID
+/api/user/:id	DELETE	Delete user by ID
+```
+
+### Frontend Pages 
+
+**Home Page** : Displays a welcome message and the overall description of the app.
+Add User Page: A form that allows the user to create new user records.
+View Users Page: Shows a list of all users in the database with options to edit or delete.
+
+
+**Screenshots**
+1. Add New User
+
+2. View All Users
+
+3. Edit User
+
+### Folder Structure
+
+
+```
+├── backend
+│   ├── models
+│   │   └── userModel.js
+│   ├── routes
+│   │   └── userRoutes.js
+│   ├── server.js
+│   └── .env
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Create.jsx
+│   │   │   └── Read.jsx
+│   │   └── App.jsx
+│   └── vite.config.js
+├── README.md
+└── package.json
+```
+
+## Future Enhancements
+
+**User Authentication** : Implement user login/signup with authentication using JWT.
+
+**Search & Filter Functionality** : Add the ability to search for users and filter results.
+Pagination: Handle large data sets by implementing pagination in the UI.
+
+**Profile Picture Upload** : Allow users to upload profile pictures when creating accounts.
+
+**Improve UI** : Enhance the overall UI/UX using more advanced styling libraries or custom components.
+Contribution Guidelines
+Feel free to contribute to this project by creating pull requests or submitting issues. 
+
+## Make sure to:
+
+#### Fork the repository.
+#### Create a new branch with a descriptive name.
+#### Make the necessary changes.
+#### Submit a pull request explaining the changes.
+
+
+#### License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+### Ashutohs Maurya 
+--- Thank You ---
+
+
+
+
+
 
