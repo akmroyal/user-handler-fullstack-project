@@ -11,6 +11,7 @@ This project is a **User Management Application** built using **React** for the 
 - **Delete Users:** Remove users from the database with a single click.
 - **Success/Error Notifications:** Display success or error messages after actions like adding or deleting a user.
 - **Responsive Design:** The frontend is designed to be mobile-friendly and adapt to different screen sizes.
+- **Searchbar Design** You can search users by his name and success fully error notification if any occurs
 
 ## Technologies Used
 
