@@ -12,7 +12,7 @@ const Navbar = () => {
                             <Link to='/create' className="nav-link active" aria-current="page">Create User</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link">Find Any</a>
+                        <Link to='/all' className="nav-link">Find Any</Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/all' className="nav-link">All user</Link>
