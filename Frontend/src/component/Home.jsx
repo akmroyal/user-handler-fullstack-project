@@ -11,7 +11,7 @@ const Home = () => {
       </p>
       <h2>Features:</h2>
       <ul>
-        <li><Link to='/create' className="nav-link active bg-primary" aria-current="page">Create new users</Link></li>
+        <li><Link to='/create' className="nav-link active" aria-current="page">Create new users</Link></li>
         <li><Link to='/all' className="nav-link">View All users</Link></li>
         <li><Link to='/all' className="nav-link">Edit user details</Link></li>
         <li>Delete users from the database<Link to='/all' className="nav-link">Edit user details</Link></li>

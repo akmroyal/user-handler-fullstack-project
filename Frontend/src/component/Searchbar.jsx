@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Searchbar = ({onSearch}) => {
+    const [filteredUser, setFilteredUser] = useState([])
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -18,10 +20,28 @@ const Navbar = () => {
                             <Link to='/all' className="nav-link">All user</Link>
                         </li>
                     </ul>
+                    <form className="d-flex" role="search">
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                            onChange={onSearch}
+                        />
+                    </form>
                 </div>
             </div>
+            {filteredUser.length > 0 && (
+                <ul className="list-group mt-2">
+                    {filteredUser.map(user => (
+                        <li key={user._id} className="list-group-item">
+                            {user.name} ({user.email})
+                        </li>
+                    ))}
+                </ul>
+            )}
         </nav>
     )
 }
 
-export default Navbar
+export default Searchbar

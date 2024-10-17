@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Searchbar from './Searchbar.jsx'
 
 const Read = () => {
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
     const [error, setError] = useState()
     // using for success alert or danger alert
     const [displayError, setDisplaError] = useState('')
+    // for the search bar
+    const [searchQuery, setSearchQuery] = useState('')
+
 
     async function getDataFromBackend() {
         // trying to fetch data from backend
@@ -55,29 +59,45 @@ const Read = () => {
     }, [])
     console.log(data);
 
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value.toLowerCase());
+    }
+
+    const filteredUsers = data.filter(
+        user => user.name.toLowerCase().includes(searchQuery)
+    )
+
     return (
-        <div className='container my-2'>
-            <h2 className='text-center'>All user details</h2>
-            {error && <div className={`alert alert-${displayError}`}>{error}</div>}
-            <div className='row'>
-                {/* using map to one by ony printing data and ? sign for optionally check if data is waiting or process then don't print any thing */}
-                {data?.map((e) => (
-                    <div key={e._id} className='col-3'>
-                        <div className="card text-center">
-                            <div className="card-body">
-                                <h3 className="">{e.name}</h3>
-                                <h6 className="card-title">{e.email}</h6>
-                                <p className="">{e.age}</p>
+        <>
+            <Searchbar onSearch={handleSearch} /> {/* Pass the search handler to Searchbar */}
+            <div className='container my-2'>
+                <h2 className='text-center'>All User Details</h2>
+                {error && <div className={`alert alert-${displayError}`}>{error}</div>}
+                <div className='row'>
+                    {/* Use filtered users instead of all data */}
+                    {filteredUsers.length > 0 ? (
+                        filteredUsers.map((e) => (
+                            <div key={e._id} className='col-3'>
+                                <div className="card text-center">
+                                    <div className="card-body">
+                                        <h3 className="">{e.name}</h3>
+                                        <h6 className="card-title">{e.email}</h6>
+                                        <p className="">{e.age}</p>
+                                    </div>
+                                    <div className="card-body">
+                                        <Link to={`/${e._id}`} className="card-link">Edit</Link>
+                                        <Link className="card-link" onClick={() => handleDelete(e._id)}>Delete</Link>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <Link to={`/${e._id}`} className="card-link">Edit</Link>
-                                <Link className="card-link" onClick={() => handleDelete(e._id)}>Delete</Link>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                        ))
+                    ) : (
+                        <div className="col-12 text-center">No users found.</div> 
+                        // Message for no results
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
