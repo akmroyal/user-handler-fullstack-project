@@ -139,7 +139,7 @@ Pagination: Handle large data sets by implementing pagination in the UI.
 
 **Profile Picture Upload** : Allow users to upload profile pictures when creating accounts.
 
-**Improve UI** : Enhance the overall UI/UX using more advanced styling libraries or custom components.
+**Improve UI** : Enhance three overall UI/UX using more advanced styling libraries or custom components.
 Contribution Guidelines
 Feel free to contribute to this project by creating pull requests or submitting issues. 
 
