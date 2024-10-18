@@ -6,16 +6,31 @@ const route = express.Router();
 
 // Create the user with frontend details :
 route.post('/', async (req, res) => {
-    const { name, email, age } = req.body;
     try {
+        const { name, email, age, socialLinks } = req.body;
+        const { facebook, instagram, linkedin, twitter } = socialLinks || {}
+
+        // getting the avatar image url from the cloudinary
+        // const avatarUrl = req.file ? req.file.path : null;
+
         const userAdded = await User.create(
             {
                 name: name,
                 email: email,
-                age: age
+                age: age,
+                // avatar: avatarUrl,
+                socialLinks: {
+                    facebook,
+                    twitter,
+                    instagram,
+                    linkedin
+                }
             }
         )
-        res.status(201).json(userAdded)
+        // saving the user's details to mongodb
+        const savedUser = await userAdded.save()
+
+        res.status(201).json(savedUser)
     } catch (error) {
         console.log("Error due to adding the data", error)
         res.status(404).json({ error: error.message })

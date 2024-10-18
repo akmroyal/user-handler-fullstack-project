@@ -15,7 +15,25 @@ const userSchema = new mongoose.Schema(
         age: {
             type: Number,
             required: true
+        },
+        // avatar: {
+        //     type: String,
+        // },
+        socialLinks: {
+            facebook: {
+                type: String
+            },
+            twitter: {
+                type: String
+            },
+            instagram: {
+                type: String
+            },
+            linkedin: {
+                type: String
+            }
         }
+
     },
     {
         timestamps: true

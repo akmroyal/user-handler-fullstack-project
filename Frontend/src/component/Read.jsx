@@ -83,6 +83,10 @@ const Read = () => {
                                         <h3 className="">{e.name}</h3>
                                         <h6 className="card-title">{e.email}</h6>
                                         <p className="">{e.age}</p>
+                                        <p className="">{e?.socialLinks?.facebook || "No link found"}-facebook</p>
+                                        <p className="">{e?.socialLinks?.instagram || "No link found"}-instagram</p>
+                                        <p className="">{e?.socialLinks?.linkedin || "No link found"}-linkedin</p>
+                                        <p className="">{e?.socialLinks?.twitter || "No link found"}-twitter</p>
                                     </div>
                                     <div className="card-body">
                                         <Link to={`/${e._id}`} className="card-link">Edit</Link>
@@ -92,7 +96,7 @@ const Read = () => {
                             </div>
                         ))
                     ) : (
-                        <div className="col-12 text-center">No users found.</div> 
+                        <div className="col-12 text-center">No users found.</div>
                         // Message for no results
                     )}
                 </div>

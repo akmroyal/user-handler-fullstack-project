@@ -5,6 +5,10 @@ const Update = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [age, setAge] = useState(0)
+  const [facebook, setFacebook] = useState("")
+  const [instagram, setInstagram] = useState("")
+  const [linkedin, setLinkedin] = useState("")
+  const [twitter, setTwitter] = useState("")
   const [displayError, setDisplaError] = useState('')
 
   // to see the data
@@ -36,6 +40,12 @@ const Update = () => {
       setName(result.name)
       setEmail(result.email)
       setAge(result.age)
+      if (result.socialLinks) {
+        setFacebook(result.socialLinks.facebook || '')
+        setLinkedin(result.socialLinks.linkedin || '')
+        setInstagram(result.socialLinks.instagram || '')
+        setTwitter(result.socialLinks.twitter || '')
+      }
     }
   }
 
@@ -51,8 +61,14 @@ const Update = () => {
   const handleUpdateUser = async (e) => {
     e.preventDefault()
 
-    // from useState
-    const updatedUser = { name, email, age }
+    // getting the data from useState
+    const socialLinks = {
+      facebook,
+      linkedin,
+      instagram,
+      twitter
+    }
+    const updatedUser = { name, email, age, socialLinks }
 
 
     const response = await fetch(`http://localhost:8000/api/user/${id}`, {
@@ -113,6 +129,38 @@ const Update = () => {
             aria-describedby="emailHelp"
             value={age}
             onChange={(e) => setAge(e.target.value)}
+          />
+          <label className="form-label">LinkedIn Profile</label>
+          <input
+            type="url"
+            className="form-control"
+            aria-describedby="emailHelp"
+            value={linkedin}
+            onChange={(e) => setLinkedin(e.target.value)}
+          />
+          <label className="form-label">Instagram Profile</label>
+          <input
+            type="url"
+            className="form-control"
+            aria-describedby="emailHelp"
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+          />
+          <label className="form-label">Facebook Profile</label>
+          <input
+            type="url"
+            className="form-control"
+            aria-describedby="emailHelp"
+            value={facebook}
+            onChange={(e) => setFacebook(e.target.value)}
+          />
+          <label className="form-label">Twitter Profile</label>
+          <input
+            type="url"
+            className="form-control"
+            aria-describedby="emailHelp"
+            value={twitter}
+            onChange={(e) => setTwitter(e.target.value)}
           />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
