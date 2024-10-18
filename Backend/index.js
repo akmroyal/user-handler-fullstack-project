@@ -5,9 +5,20 @@ dotenv.config()
 const app = express()
 const mongoose = require('mongoose')
 app.use(express.json())
+// increasing the file size limits
+app.use(express.json({
+    limit: '50mb' // increase limit
+}))
+app.use(express.urlencoded({
+    limit: '50mb',
+    extended: true
+}))
+
 const userRoute = require('./router/userRoute.router.js')
 const cors = require('cors') // helps to send data from frontend
-app.use(cors())
+app.use(cors({
+    origin: '*',
+}))
 
 
 const DB_NAME = "simpleDataBaseFetchPractice" // this is my mongodb Official Data base name

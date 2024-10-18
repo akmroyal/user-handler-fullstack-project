@@ -6,6 +6,7 @@ const Create = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [age, setAge] = useState(0)
+    const [avatar, setAvatar] = useState(null)
     const [facebook, setFacebook] = useState("")
     const [instagram, setInstagram] = useState("")
     const [linkedin, setLinkedin] = useState("")
@@ -23,24 +24,42 @@ const Create = () => {
     // handling the submit functionalites
     const handleSubmit = async (e) => {
         e.preventDefault() // to helps stop the by default functionlities of form
-        const addUser = {
-            name,
-            email,
-            age,
-            socialLinks: {
-                facebook,
-                instagram,
-                linkedin,
-                twitter
-            }
+        // const addUser = {
+        //     name,
+        //     email,
+        //     age,
+        //     avatar,
+        //     socialLinks: {
+        //         facebook,
+        //         instagram,
+        //         linkedin,
+        //         twitter
+        //     }
+        // }
+        if (!name || !email || !age) {
+            setDisplaError('danger')
+            setError('Name, email, and age are required.');
+            return
         }
+
+        const formData = new FormData()
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('age', age);
+        formData.append('avatar', avatar); // Appending file
+        formData.append('socialLinks[facebook]', facebook);
+        formData.append('socialLinks[instagram]', instagram);
+        formData.append('socialLinks[linkedin]', linkedin);
+        formData.append('socialLinks[twitter]', twitter);
+
 
         const response = await fetch('http://localhost:8000/api/user', {
             method: "POST",
-            body: JSON.stringify(addUser),
-            headers: {
-                "Content-Type": "application/json",
-            }
+            // body: JSON.stringify(addUser),
+            body: formData, // sending data's in form type
+            // headers: {
+            //     "Content-Type": "application/json",
+            // }
         })
 
         const result = await response.json()
@@ -62,6 +81,7 @@ const Create = () => {
             setName('')
             setEmail('')
             setAge(0)
+            setAvatar(null)
             setInstagram('')
             setLinkedin('')
             setTwitter('')
@@ -78,6 +98,10 @@ const Create = () => {
         }
     }
 
+    const handleFileData = (e) => {
+        setAvatar(e.target.files[0]) // storing the file in state
+    }
+
     return (
         <div className='text-center gap-5'>
             <h1 className='bg-success my-4'>Create User</h1>
@@ -90,6 +114,7 @@ const Create = () => {
                         type="file"
                         className="form-control"
                         aria-describedby="emailHelp"
+                        onChange={handleFileData}
                     />
                     <label className="form-label">Name</label>
                     <input
@@ -155,171 +180,3 @@ const Create = () => {
 }
 
 export default Create
-
-
-// ---------------------------
-
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-// const Create = () => {
-//     const [name, setName] = useState("")
-//     const [email, setEmail] = useState("")
-//     const [age, setAge] = useState(0)
-//     const [avatar, setAvatar] = useState(null) // New state for avatar
-//     const [facebook, setFacebook] = useState("") // New state for Facebook link
-//     const [twitter, setTwitter] = useState("")  // New state for Twitter link
-//     const [linkedIn, setLinkedIn] = useState("")  // New state for LinkedIn link
-//     const [gitHub, setGitHub] = useState("")  // New state for GitHub link
-//     const [displayError, setDisplaError] = useState('')
-//     const [error, setError] = useState('')
-//     const navigate = useNavigate()
-
-//     // Handling avatar upload and setting the file
-//     // const handleAvatarChange = (e) => {
-//     //     setAvatar(e.target.files[0])
-//     // }
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault()
-//         const formData = new FormData()
-
-//         // Adding all the data to formData
-//         formData.append("name", name)
-//         formData.append("email", email)
-//         formData.append("age", age)
-//         // formData.append("avatar", avatar)  // Adding avatar to formData
-//         formData.append("facebook", facebook)
-//         formData.append("twitter", twitter)
-//         formData.append("linkedIn", linkedIn)
-//         formData.append("gitHub", gitHub)
-
-//         const response = await fetch('http://localhost:8000/api/user', {
-//             method: "POST",
-//             body: formData,
-//         })
-
-//         const result = await response.json()
-
-//         if (!response.ok) {
-//             console.log(result.error)
-//             setDisplaError('danger')
-//             setError(result.error)
-//         }
-
-//         if (response.ok) {
-//             setDisplaError('success')
-//             setError('User created successfully :)')
-//             setName('')
-//             setEmail('')
-//             setAge(0)
-//             setAvatar(null)
-//             setFacebook('')
-//             setTwitter('')
-//             setLinkedIn('')
-//             setGitHub('')
-
-//             setTimeout(() => {
-//                 setError('')
-//                 navigate('/all')
-//             }, 1000)
-//         }
-//     }
-
-//     return (
-//         <div className='container text-center gap-5'>
-//             <h1 className='bg-success my-4'>Create User</h1>
-//             <h4>Enter Your Details</h4>
-//             {error && <div className={`alert alert-${displayError}`}>{error}</div>}
-//             <form onSubmit={handleSubmit} encType="multipart/form-data">
-//                 <div className="mb-3 text-start">
-//                     {/* Avatar upload */}
-//                     <label className="form-label">Avatar</label>
-//                     <input
-//                         type="file"
-//                         className="form-control"
-//                         onChange={handleAvatarChange}
-//                     />
-//                     {avatar && (
-//                         <div className="mt-2">
-//                             <img
-//                                 src={URL.createObjectURL(avatar)}
-//                                 alt="Avatar Preview"
-//                                 style={{ width: '100px', borderRadius: '50%' }}
-//                             />
-//                         </div>
-//                     )}
-
-//                     {/* Name input */}
-//                     <label className="form-label mt-3">Name</label>
-//                     <input
-//                         type="text"
-//                         className="form-control"
-//                         value={name}
-//                         onChange={(e) => setName(e.target.value)}
-//                     />
-
-//                     {/* Email input */}
-//                     <label className="form-label mt-3">Email address</label>
-//                     <input
-//                         type="email"
-//                         className="form-control"
-//                         value={email}
-//                         onChange={(e) => setEmail(e.target.value)}
-//                     />
-
-//                     {/* Age input */}
-//                     <label className="form-label mt-3">Age</label>
-//                     <input
-//                         type="number"
-//                         className="form-control"
-//                         value={age}
-//                         onChange={(e) => setAge(e.target.value)}
-//                     />
-
-//                     {/* Social media links */}
-//                     <label className="form-label mt-3">Facebook</label>
-//                     <input
-//                         type="url"
-//                         className="form-control"
-//                         value={facebook}
-//                         onChange={(e) => setFacebook(e.target.value)}
-//                     />
-
-//                     <label className="form-label mt-3">Twitter</label>
-//                     <input
-//                         type="url"
-//                         className="form-control"
-//                         value={twitter}
-//                         onChange={(e) => setTwitter(e.target.value)}
-//                     />
-
-//                     <label className="form-label mt-3">LinkedIn</label>
-//                     <input
-//                         type="url"
-//                         className="form-control"
-//                         value={linkedIn}
-//                         onChange={(e) => setLinkedIn(e.target.value)}
-//                     />
-
-//                     <label className="form-label mt-3">GitHub</label>
-//                     <input
-//                         type="url"
-//                         className="form-control"
-//                         value={gitHub}
-//                         onChange={(e) => setGitHub(e.target.value)}
-//                     />
-//                 </div>
-
-//                 {/* Submit button */}
-//                 <button type="submit" className="btn btn-primary">Submit</button>
-//             </form>
-//         </div>
-//     )
-// }
-
-//export default Create
-
-
-
-

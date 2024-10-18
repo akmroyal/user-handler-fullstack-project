@@ -79,6 +79,7 @@ const Read = () => {
                         filteredUsers.map((e) => (
                             <div key={e._id} className='col-3'>
                                 <div className="card text-center">
+                                <img class="card-img-top" src={e.avatar} alt="Avatar"/>
                                     <div className="card-body">
                                         <h3 className="">{e.name}</h3>
                                         <h6 className="card-title">{e.email}</h6>

@@ -16,9 +16,10 @@ const userSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        // avatar: {
-        //     type: String,
-        // },
+        avatar: {
+            type: String,
+            required: false
+        },
         socialLinks: {
             facebook: {
                 type: String

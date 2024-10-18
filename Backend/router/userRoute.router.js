@@ -1,24 +1,23 @@
 const express = require("express")
 const User = require('../models/userModels.model.js')
+const upload = require('../middlewares/multerConfig.middleware.js')
 const route = express.Router();
 
-
-
 // Create the user with frontend details :
-route.post('/', async (req, res) => {
+route.post('/', upload.single('avatar'), async (req, res) => {
     try {
         const { name, email, age, socialLinks } = req.body;
         const { facebook, instagram, linkedin, twitter } = socialLinks || {}
 
         // getting the avatar image url from the cloudinary
-        // const avatarUrl = req.file ? req.file.path : null;
+        const avatarUrl = req.file ? req.file.path : null;
 
         const userAdded = await User.create(
             {
                 name: name,
                 email: email,
                 age: age,
-                // avatar: avatarUrl,
+                avatar: avatarUrl,
                 socialLinks: {
                     facebook,
                     twitter,
@@ -84,11 +83,20 @@ route.delete('/:id', async (req, res) => {
 
 
 // updating the existing user details 
-route.patch('/:id', async (req, res) => {
+route.patch('/:id', upload.single('avatar'), async (req, res) => {
     const { id } = req.params
-    const { name, email, age } = req.body
+    const { name, email, age, socialLinks } = req.body
 
     try {
+        // if avatar is uploaded, update it's url
+        const avatarUrl = req.file ? req.file.path : null
+        // if avatar is provided in req, includes it in the update
+        const updateData = {
+            ...req.body,
+            //updating url of avatar
+            ...(avatarUrl ? { avatar: avatarUrl } : {}) //only include avatar if it exists
+        }
+
         const updateUser = await User.findByIdAndUpdate(id, req.body, {
             new: true
         })
