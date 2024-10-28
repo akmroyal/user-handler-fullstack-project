@@ -1,42 +1,98 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Read.jsx file Css */
+.card:hover {
+  -webkit-box-shadow: 0px 0px 32px 1px rgba(0, 0, 0, 0.61);
+  -moz-box-shadow: 0px 0px 32px 1px rgba(0, 0, 0, 0.61);
+  box-shadow: 0px 0px 32px 1px rgba(0, 0, 0, 0.61);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mediabtn {
+  width: 100%;
+  padding-inline: 2vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.mediabtn .link {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  text-decoration: none;
 }
 
-.card {
-  padding: 2em;
+.mediabtn .link i {
+  font-size: 1.5rem;
+  color: white;
 }
 
-.read-the-docs {
-  color: #888;
+/* UserProfileCard */
+
+.cont-main-page{
+  position: relative;
+  width: 98vw;
+  height: 100vh;
+  display: flex;
+  background-color: aquamarine;
+  padding: 2vw 2vw 1vw 2vw;
+  overflow: hidden;
+}
+
+.cont-main-page .card-cont{
+  position: relative;
+  max-width: 22rem;
+  max-height: 30rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9vw;
+  background-color: white;
+  padding-bottom: 1vw;
+}
+
+.cont-main-page .design-round{
+  background-color: blue;
+  width: 100%;
+  height: 18vh;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 45%;
+  border-bottom-right-radius: 45%;
+  padding-block: 0.5rem;
+}
+
+.cont-main-page .card-body{
+  display: flex;
+  flex-direction: column;
+  padding-inline: 2px;
+}
+
+.icon{
+  width: 100%;
+  /* background: #000; */
+  display: flex;
+}
+.icon i{
+  font-size: 1.4rem;
+  border: 2px solid blue;
+  border-radius: 50%;
+  padding: 4px;
+}
+/* d-flex justify-content-around mt-4 border-top pt-3 */
+.contact-cont{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+}
+
+.text h3{
+  font-weight: 700;
+  color: #2689eb;
+  /* text-shadow: 1px 1px 2px black; */
 }

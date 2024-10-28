@@ -4,6 +4,7 @@ import Navbar from './component/Navbar.jsx';
 import Read from './component/Read.jsx';
 import Update from './component/Update.jsx';
 import Home from './component/Home.jsx';
+import UserProfileCard from './component/UserProfileCard.jsx';
 
 function App() {
   // This hook provides information about the current route.
@@ -18,6 +19,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/all" element={<Read />} />
         <Route path="/:id" element={<Update />} />
+        <Route path="/card" element={<UserProfileCard />} />
       </Routes>
     </div>
   );

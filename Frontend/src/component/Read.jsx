@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Searchbar from './Searchbar.jsx'
+import UserProfileCard from './UserProfileCard.jsx'
 
 const Read = () => {
     const [data, setData] = useState([])
@@ -77,17 +78,52 @@ const Read = () => {
                     {/* Use filtered users instead of all data */}
                     {filteredUsers.length > 0 ? (
                         filteredUsers.map((e) => (
-                            <div key={e._id} className='col-3'>
+                            <div key={e._id} className='col-3 hover-effect'>
                                 <div className="card text-center">
-                                <img class="card-img-top" src={e.avatar} alt="Avatar"/>
+                                    <img className="card-img-top" src={e.avatar} alt="Avatar" />
                                     <div className="card-body">
                                         <h3 className="">{e.name}</h3>
                                         <h6 className="card-title">{e.email}</h6>
                                         <p className="">{e.age}</p>
-                                        <p className="">{e?.socialLinks?.facebook || "No link found"}-facebook</p>
-                                        <p className="">{e?.socialLinks?.instagram || "No link found"}-instagram</p>
-                                        <p className="">{e?.socialLinks?.linkedin || "No link found"}-linkedin</p>
-                                        <p className="">{e?.socialLinks?.twitter || "No link found"}-twitter</p>
+                                        {/* <p className="">{e?.socialLinks?.facebook || "No link found"}-facebook</p> */}
+                                        {/* <p className="">{e?.socialLinks?.instagram || "No link found"}-instagram</p> */}
+                                        {/* <p className="">{e?.socialLinks?.linkedin || "No link found"}-linkedin</p> */}
+                                        {/* <p className="">{e?.socialLinks?.twitter || "No link found"}-twitter</p> */}
+                                        <div className="mediabtn">
+                                            <a href={e?.socialLinks?.facebook} style={{ background: '#4267b2' }} className="link" target='_blank'>
+                                                <i className='bx bxl-facebook'></i>
+                                            </a>
+                                            <a href={e?.socialLinks?.instagram} style={{ background: '#064972ea' }} className="link" target='_blank'>
+                                                <i className='bx bxl-linkedin'></i>
+                                            </a>
+                                            <a href={e?.socialLinks?.linkedin} style={{ background: '#e1306c' }} className="link" target='_blank'>
+                                                <i className='bx bxl-instagram-alt'></i>
+                                            </a>
+                                            <a href={e?.socialLinks?.twitter} style={{ background: '#1da1f2' }} className="link" target='_blank'>
+                                                <i className='bx bxl-twitter'></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div className="btn text-black">
+                                        <Link
+                                            to={
+                                                {
+                                                    pathname: '/card'
+                                                }
+                                            }
+                                            state={
+                                                {
+                                                    user: e // e contains the all user data 
+                                                }
+                                            }
+                                        >
+                                            <button
+                                                type='button'
+                                                className='btn btn-info'
+                                            >
+                                                Generate Your Card
+                                            </button>
+                                        </Link>
                                     </div>
                                     <div className="card-body">
                                         <Link to={`/${e._id}`} className="card-link">Edit</Link>
