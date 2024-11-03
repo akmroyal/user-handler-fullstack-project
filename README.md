@@ -4,6 +4,21 @@
 
 This project is a **User Management Application** built using **React** for the frontend and **Node.js with Express** for the backend. It interacts with a **MongoDB** database for storing and managing user information. The application allows you to perform basic CRUD (Create, Read, Update, Delete) operations on user data through a clean user interface.
 
+## Screenshots
+
+### Home Page
+![Home Page](https://res.cloudinary.com/akm-royal/image/upload/v1730645654/Screenshot_2024-11-03_201542_tl0ihk.png)
+
+### Create User Page
+![Create User Page](https://res.cloudinary.com/akm-royal/image/upload/v1730645653/Screenshot_2024-11-03_201638_yh6duq.png)
+
+### All Users Page
+![All Users Page](https://res.cloudinary.com/akm-royal/image/upload/v1730645654/Screenshot_2024-11-03_202034_rt1jbr.png)
+
+### Generate Social Card Page
+![Generate Social Card Page](https://res.cloudinary.com/akm-royal/image/upload/v1730645654/Screenshot_2024-11-03_202109_hit8m4.png)
+
+
 ### Key Features
 - **Add New Users:** Fill out a form to add a new user with a name, email, and age.
 - **View All Users:** Display all users stored in the MongoDB database in a card format.
